@@ -1,0 +1,13 @@
+# /usr/lib/systemd/system/svnserve.service 
+[Unit]
+Description=Subversion protocol daemon
+After=syslog.target network.target
+
+[Service]
+Type=forking
+EnvironmentFile=/etc/sysconfig/svnserve
+#ExecStart=/usr/bin/svnserve --daemon --pid-file=/run/svnserve/svnserve.pid $OPTIONS
+ExecStart=/usr/bin/svnserve --daemon --pid-file=/run/svnserve/svnserve.pid -d -r /usr/svn
+
+[Install]
+WantedBy=multi-user.target
