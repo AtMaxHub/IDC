@@ -41,3 +41,39 @@
 			}
 		}
 	}
+	
+	
+//================================
+package com.wbhl.service.impl;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.wbhl.dao.JedisClientDAO;
+import com.wbhl.service.GameCtrlService;
+import com.wbhl.util.ResultUtil;
+
+@Service
+public class GameCtrlServiceImpl implements GameCtrlService {
+
+	private static Logger LOG = LoggerFactory.getLogger(GameCtrlServiceImpl.class);
+
+	@Autowired
+	private JedisClientDAO jedisDao;
+
+	@Override
+	public String exitNow(String orderid) {
+		if (StringUtils.isBlank(orderid)) {
+			return ResultUtil.errResult("orderid_Is_Null");
+		}
+		if (jedisDao.EXISTS(orderid)) {
+			LOG.info("Exit_Game_Active [{}]", orderid);
+			return ResultUtil.buildOKResult(jedisDao.del(orderid));
+		}
+		LOG.error("{} Not_Found", orderid);
+		return ResultUtil.errResult("找不到订单 " + orderid);
+	}
+}
