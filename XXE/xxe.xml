@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE foo [
+    
+    <!ENTITY content SYSTEM "123">]>
+<foo>
+        <value>&content;</value> 
+		<!-- <!ENTITY content SYSTEM "file:///etc/passwd">]> 
+		file:///D:/workdir/tmp/MP_verify_wDRvNey312bYLU4z.txt
+		-->
+</foo>
+

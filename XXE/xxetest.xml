@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE foo [
+    <!ENTITY name SYSTEM "http://localhost:8000/index.html">]>
+<foo>
+	<value>&name;</value> 
+</foo>

