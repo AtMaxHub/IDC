@@ -13,7 +13,7 @@
 	</target>
 	
 	<target name="compile" depends="init" >
-		<javac destdir="build/classes" debug="true" srcdir="src">
+		<javac  target="1.6" source="1.6" destdir="build/classes" debug="true" srcdir="src" includeAntRuntime="false">
 			<!--给编译器指定编码，防止出现："警告： 编码 GBK 的不可映射字符"-->
 			<compilerarg line="-encoding UTF-8 "/>   
 			<classpath refid="compile.classpath"/>
