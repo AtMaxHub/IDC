@@ -1,0 +1,1 @@
+createobject("wscript.shell").run "GoPing.bat",0
