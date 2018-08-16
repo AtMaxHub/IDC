@@ -1,0 +1,62 @@
+<?xml version="1.0"  encoding="UTF-8"?> 
+<project name="search" default="war">
+	
+	<property name="dir.web" value="WebRoot"/>
+	<property name="dir.lib" value="${dir.web}/WEB-INF/lib"/>
+	<!-- <property name="dir.classes" value="${dir.web}/WEB-INF/classes" /> -->
+	<property name="dir.classes" value="build/classes" />
+	<property name="dir.src" value="src"/>
+
+	<path id="compile.classpath">
+		<fileset dir="WebRoot/WEB-INF/lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="init">
+		<mkdir dir="build/classes"/>
+		<mkdir dir="dist" />
+	</target>
+	
+	<!-- <target name="copy" depends="init"> -->
+	<!-- <echo message="复制文件"/> -->
+		<!-- <copy todir="${dir.classes}" preservelastmodified="true" verbose="true"> -->
+		   <!-- <fileset dir="${dir.src}"> -->
+			<!-- <include name="**/*.properties"/> -->
+			<!-- <include name="**/*.xml"/>     -->
+		   <!-- </fileset> -->
+		<!-- </copy> -->
+	<!-- </target> -->
+	
+	<target name="compile" depends="init" >
+		<!-- executable="C:\Program Files\Java\jdk1.5.0_22/bin/javac" fork="yes" -->
+		<javac target="1.6" source="1.6" destdir="build/classes" debug="true" srcdir="src" includeAntRuntime="false">
+			<!--给编译器指定编码，防止出现："警告： 编码 GBK 的不可映射字符"-->
+			<compilerarg line="-encoding UTF-8 "/>   
+			<classpath refid="compile.classpath"/>
+		</javac>
+		<echo message="编译完成"/>
+		
+		<echo message="复制文件"/>
+		<copy todir="${dir.classes}" preservelastmodified="true" verbose="true">
+		   <fileset dir="${dir.src}">
+			<include name="**/*.properties"/>
+			<include name="**/*.xml"/>    
+		   </fileset>
+		</copy>
+	</target>
+	
+	<target name="war" depends="compile">
+		<war destfile="dist/search.war" webxml="WebRoot/WEB-INF/web.xml">
+			<fileset dir="WebRoot"/>
+			<lib dir="WebRoot/WEB-INF/lib"/>
+			<classes dir="build/classes"/>
+		</war>
+	</target>
+	
+	<target name="clean">
+		<delete dir="dist" />
+		<delete dir="build" />
+	</target>
+	
+</project>
