@@ -1,0 +1,6 @@
+@ECHO OFF
+:LOOP
+	netstat -aon|findstr "99 50859" |  findstr  /V "66348 63592 10096 73512 7824"
+	TIMEOUT /T 1 /NOBREAK
+GOTO:LOOP
+
